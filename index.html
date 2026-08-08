@@ -569,8 +569,23 @@
 
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 900px){
-    .hero-grid{grid-template-columns:1fr;gap:70px;}
-    .hero-portrait{order:-1;max-width:280px;}
+    .hero-grid{grid-template-columns:1fr;gap:56px;}
+    .hero-portrait{
+      order:-1;
+      max-width:220px;
+      margin:0 auto;
+      aspect-ratio:1/1;
+    }
+    .ring-arc{display:none;}
+    .portrait-frame{inset:0;border-radius:50%;}
+    .portrait-caption{
+      position:static;
+      transform:none;
+      max-width:220px;
+      margin:18px auto 0;
+      border-radius:2px;
+    }
+    .hero{padding-top:96px;}
     .about-grid{grid-template-columns:1fr;gap:44px;}
     .expertise-grid{grid-template-columns:1fr 1fr;}
     .contact-panel{grid-template-columns:1fr;}
@@ -579,6 +594,8 @@
   @media (max-width: 600px){
     .wrap{padding:0 22px;}
     section{padding:90px 0;}
+    .hero{padding-top:88px;}
+    .eyebrow{flex-wrap:wrap;row-gap:8px;}
     .expertise-grid{grid-template-columns:1fr;}
     .stat-list{grid-template-columns:1fr;}
     .timeline::before{left:14px;}

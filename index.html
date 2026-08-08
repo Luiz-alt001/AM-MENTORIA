@@ -229,7 +229,7 @@
   .hero-portrait{
     position:relative;
     aspect-ratio:1/1.08;
-    max-width:400px;
+    max-width:340px;
     justify-self:center;
   }
   .ring-arc{
@@ -240,18 +240,19 @@
   .portrait-frame{
     position:absolute;
     inset:9%;
-    border-radius:6px;
+    border-radius:8px;
     overflow:hidden;
-    background:linear-gradient(160deg, var(--bg-panel-2), var(--bg-deep));
+    background:var(--bg-deep);
     border:1px solid rgba(255,255,255,0.05);
     display:flex;
     align-items:center;
     justify-content:center;
+    padding:6%;
   }
   .portrait-frame .logo-full{
     width:100%;
     height:100%;
-    object-fit:cover;
+    object-fit:contain;
   }
   .portrait-caption{
     position:absolute;
@@ -572,17 +573,17 @@
     .hero-grid{grid-template-columns:1fr;gap:56px;}
     .hero-portrait{
       order:-1;
-      max-width:220px;
+      max-width:230px;
       margin:0 auto;
       aspect-ratio:1/1;
     }
     .ring-arc{display:none;}
-    .portrait-frame{inset:0;border-radius:50%;}
+    .portrait-frame{inset:0;border-radius:12px;padding:8%;}
     .portrait-caption{
       position:static;
       transform:none;
-      max-width:220px;
-      margin:18px auto 0;
+      max-width:230px;
+      margin:16px auto 0;
       border-radius:2px;
     }
     .hero{padding-top:96px;}

@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AM Mentoria Empresarial — Adriana Moreira</title>
+<meta name="description" content="Mentoria empresarial, consultoria de gestão e treinamento de RH com Adriana Moreira, em Campos dos Goytacazes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#12161c;
+    --bg-panel:#191f27;
+    --bg-panel-2:#1e2530;
+    --gold:#c7a45f;
+    --gold-soft:#8f7a4f;
+    --gold-light:#e6c986;
+    --cream:#f3ede0;
+    --slate:#9aa4b0;
+    --slate-dim:#6b7480;
+    --line:rgba(199,164,95,0.22);
+    --serif:'Cormorant Garamond', serif;
+    --sans:'Work Sans', sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg-deep);
+    color:var(--cream);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  a{color:inherit;text-decoration:none;}
+
+  img{max-width:100%;display:block;}
+
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  ::selection{background:var(--gold);color:var(--bg-deep);}
+
+  :focus-visible{
+    outline:2px solid var(--gold-light);
+    outline-offset:3px;
+  }
+
+  /* background texture: faint diagonal planes echoing the mark */
+  .bg-planes{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    background:
+      linear-gradient(115deg, transparent 38%, rgba(255,255,255,0.02) 39%, rgba(255,255,255,0.02) 41%, transparent 42%),
+      linear-gradient(115deg, transparent 58%, rgba(255,255,255,0.015) 59%, rgba(255,255,255,0.015) 60.4%, transparent 61.4%),
+      radial-gradient(ellipse 900px 600px at 82% -6%, rgba(199,164,95,0.10), transparent 60%);
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:50;
+    background:rgba(18,22,28,0.72);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  nav.wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:76px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-family:var(--serif);
+    font-size:1.3rem;
+    letter-spacing:0.03em;
+    color:var(--cream);
+  }
+  .brand .mark{
+    width:38px;height:38px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+    overflow:hidden;
+    flex-shrink:0;
+  }
+  .brand .mark img{width:100%;height:100%;object-fit:cover;}
+  .brand small{
+    display:block;
+    font-family:var(--sans);
+    font-size:0.58rem;
+    letter-spacing:0.22em;
+    color:var(--slate);
+    font-weight:400;
+    margin-top:2px;
+  }
+  .nav-links{
+    display:flex;
+    gap:40px;
+    font-size:0.82rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--slate);
+  }
+  .nav-links a{
+    position:relative;
+    padding:6px 0;
+    transition:color .25s ease;
+  }
+  .nav-links a:hover{color:var(--gold-light);}
+  .nav-links a::after{
+    content:'';
+    position:absolute;left:0;bottom:0;
+    width:0;height:1px;
+    background:var(--gold);
+    transition:width .3s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    border:1px solid var(--line);
+    padding:9px 20px;
+    border-radius:2px;
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+    transition:all .25s ease;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--gold);border-color:var(--gold);color:var(--bg-deep);}
+  .nav-toggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:76px;
+    z-index:1;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:60px;
+    align-items:center;
+    width:100%;
+  }
+  .eyebrow{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    font-size:0.78rem;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:28px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:36px;height:1px;
+    background:var(--gold);
+  }
+  h1.headline{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(2.6rem, 5vw, 4.2rem);
+    line-height:1.06;
+    color:var(--cream);
+    margin-bottom:26px;
+    letter-spacing:0.005em;
+  }
+  h1.headline em{
+    font-style:italic;
+    color:var(--gold-light);
+    font-weight:400;
+  }
+  .hero-sub{
+    font-size:1.06rem;
+    color:var(--slate);
+    max-width:480px;
+    margin-bottom:38px;
+    font-weight:300;
+  }
+  .hero-actions{
+    display:flex;
+    align-items:center;
+    gap:28px;
+    flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:var(--gold);
+    color:var(--bg-deep);
+    padding:15px 32px;
+    border-radius:2px;
+    font-size:0.82rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    font-weight:500;
+    transition:all .25s ease;
+    display:inline-block;
+  }
+  .btn-primary:hover{background:var(--gold-light);transform:translateY(-1px);}
+  .btn-ghost{
+    font-size:0.82rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--slate);
+    border-bottom:1px solid var(--slate-dim);
+    padding-bottom:3px;
+    transition:all .25s ease;
+  }
+  .btn-ghost:hover{color:var(--gold-light);border-color:var(--gold-light);}
+
+  .hero-portrait{
+    position:relative;
+    aspect-ratio:1/1.08;
+    max-width:400px;
+    justify-self:center;
+  }
+  .ring-arc{
+    position:absolute;
+    inset:-8%;
+    width:116%;height:116%;
+  }
+  .portrait-frame{
+    position:absolute;
+    inset:9%;
+    border-radius:6px;
+    overflow:hidden;
+    background:linear-gradient(160deg, var(--bg-panel-2), var(--bg-deep));
+    border:1px solid rgba(255,255,255,0.05);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .portrait-frame .logo-full{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .portrait-caption{
+    position:absolute;
+    bottom:-2px;left:9%;right:9%;
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    padding:14px 18px;
+    transform:translateY(50%);
+    text-align:center;
+  }
+  .portrait-caption strong{
+    display:block;
+    font-family:var(--serif);
+    font-size:1.15rem;
+    color:var(--cream);
+    font-weight:500;
+  }
+  .portrait-caption span{
+    display:block;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-top:4px;
+  }
+
+  .scroll-cue{
+    position:absolute;
+    bottom:38px;left:32px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:0.7rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--slate-dim);
+  }
+  .scroll-cue .line{
+    width:1px;height:34px;
+    background:linear-gradient(var(--gold), transparent);
+  }
+
+  /* ---------- SECTION BASICS ---------- */
+  section{
+    position:relative;
+    z-index:1;
+    padding:130px 0;
+  }
+  .section-head{
+    margin-bottom:64px;
+    max-width:640px;
+  }
+  .section-head .eyebrow{margin-bottom:18px;}
+  .section-head h2{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(2rem, 3.4vw, 2.8rem);
+    color:var(--cream);
+    line-height:1.15;
+  }
+  .section-head p{
+    color:var(--slate);
+    margin-top:18px;
+    font-size:1.02rem;
+    max-width:560px;
+  }
+  .divider{
+    height:1px;
+    background:linear-gradient(90deg, var(--line), transparent);
+    margin:0;
+  }
+
+  /* ---------- SOBRE ---------- */
+  #sobre{background:var(--bg-panel);}
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    align-items:start;
+  }
+  .about-grid p{
+    color:var(--slate);
+    font-size:1.03rem;
+    margin-bottom:20px;
+  }
+  .about-grid p strong{color:var(--cream);font-weight:500;}
+  .stat-list{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .stat{
+    background:var(--bg-panel);
+    padding:32px 26px;
+  }
+  .stat .num{
+    font-family:var(--serif);
+    font-size:2.6rem;
+    color:var(--gold-light);
+    font-weight:500;
+    line-height:1;
+  }
+  .stat .label{
+    display:block;
+    margin-top:10px;
+    font-size:0.8rem;
+    color:var(--slate);
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- ATUAÇÃO / ESPECIALIDADES ---------- */
+  .expertise-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .expertise-card{
+    background:var(--bg-deep);
+    padding:40px 34px;
+    transition:background .3s ease;
+  }
+  .expertise-card:hover{background:var(--bg-panel-2);}
+  .expertise-card .idx{
+    font-family:var(--serif);
+    font-size:0.85rem;
+    color:var(--gold-soft);
+    letter-spacing:0.1em;
+    margin-bottom:20px;
+    display:block;
+  }
+  .expertise-card h3{
+    font-family:var(--serif);
+    font-size:1.4rem;
+    font-weight:500;
+    color:var(--cream);
+    margin-bottom:12px;
+  }
+  .expertise-card p{
+    color:var(--slate);
+    font-size:0.92rem;
+  }
+
+  /* ---------- TRAJETÓRIA / TIMELINE ---------- */
+  #trajetoria{background:var(--bg-panel);}
+  .timeline{
+    position:relative;
+    max-width:760px;
+  }
+  .timeline::before{
+    content:'';
+    position:absolute;
+    left:118px;
+    top:8px;bottom:8px;
+    width:1px;
+    background:linear-gradient(var(--line), rgba(199,164,95,0.5), var(--line));
+  }
+  .t-item{
+    position:relative;
+    display:grid;
+    grid-template-columns:100px 1fr;
+    gap:18px;
+    padding:0 0 52px 0;
+  }
+  .t-item:last-child{padding-bottom:0;}
+  .t-year{
+    font-family:var(--serif);
+    font-size:1.05rem;
+    color:var(--gold);
+    text-align:right;
+    padding-top:2px;
+  }
+  .t-dot{
+    position:absolute;
+    left:114px;top:6px;
+    width:9px;height:9px;
+    border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 0 4px var(--bg-panel), 0 0 0 5px var(--line);
+  }
+  .t-content{padding-left:36px;}
+  .t-content h3{
+    font-family:var(--serif);
+    font-size:1.25rem;
+    font-weight:500;
+    color:var(--cream);
+    margin-bottom:6px;
+  }
+  .t-content .org{
+    font-size:0.78rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--slate-dim);
+    margin-bottom:10px;
+  }
+  .t-content p{
+    color:var(--slate);
+    font-size:0.94rem;
+  }
+
+  /* ---------- DESTAQUE (achievement banner) ---------- */
+  .highlight{
+    position:relative;
+    padding:70px 60px;
+    border:1px solid var(--line);
+    background:
+      radial-gradient(ellipse 500px 300px at 90% 0%, rgba(199,164,95,0.08), transparent 70%),
+      var(--bg-deep);
+    text-align:center;
+  }
+  .highlight .quote-mark{
+    font-family:var(--serif);
+    font-size:3.5rem;
+    color:var(--gold-soft);
+    line-height:1;
+    margin-bottom:10px;
+  }
+  .highlight p{
+    font-family:var(--serif);
+    font-size:clamp(1.4rem, 2.6vw, 1.9rem);
+    font-style:italic;
+    color:var(--cream);
+    max-width:760px;
+    margin:0 auto 24px;
+    line-height:1.4;
+  }
+  .highlight .attribution{
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  /* ---------- CONTATO ---------- */
+  #contato{
+    background:var(--bg-panel);
+    padding-bottom:0;
+  }
+  .contact-panel{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    border:1px solid var(--line);
+  }
+  .contact-left{
+    padding:64px 56px;
+    background:var(--bg-deep);
+  }
+  .contact-left h2{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(1.9rem, 3.2vw, 2.5rem);
+    color:var(--cream);
+    margin-bottom:20px;
+    line-height:1.2;
+  }
+  .contact-left p{
+    color:var(--slate);
+    margin-bottom:36px;
+    max-width:420px;
+  }
+  .contact-right{
+    padding:64px 56px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:26px;
+  }
+  .contact-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    border-bottom:1px solid rgba(255,255,255,0.07);
+    padding-bottom:20px;
+  }
+  .contact-row .k{
+    font-size:0.74rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--slate-dim);
+  }
+  .contact-row .v{
+    font-family:var(--serif);
+    font-size:1.15rem;
+    color:var(--gold-light);
+  }
+  .contact-row a.v:hover{color:var(--cream);}
+
+  footer{
+    padding:34px 0;
+    text-align:center;
+    font-size:0.75rem;
+    letter-spacing:0.06em;
+    color:var(--slate-dim);
+    border-top:1px solid rgba(255,255,255,0.06);
+    margin-top:0;
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .8s ease, transform .8s ease;
+  }
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;animation:none !important;}
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;}
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px){
+    .hero-grid{grid-template-columns:1fr;gap:70px;}
+    .hero-portrait{order:-1;max-width:280px;}
+    .about-grid{grid-template-columns:1fr;gap:44px;}
+    .expertise-grid{grid-template-columns:1fr 1fr;}
+    .contact-panel{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+  }
+  @media (max-width: 600px){
+    .wrap{padding:0 22px;}
+    section{padding:90px 0;}
+    .expertise-grid{grid-template-columns:1fr;}
+    .stat-list{grid-template-columns:1fr;}
+    .timeline::before{left:14px;}
+    .t-item{grid-template-columns:1fr;}
+    .t-year{text-align:left;padding-left:36px;}
+    .t-dot{left:10px;}
+    .t-content{padding-left:36px;}
+    .highlight{padding:48px 26px;}
+    .contact-left,.contact-right{padding:44px 26px;}
+    .nav-cta{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-planes"></div>
+
+<header>
+  <nav class="wrap">
+    <a href="#top" class="brand">
+      <span class="mark">
+        <img src="assets/logo.png" alt="AM Mentoria Empresarial">
+      </span>
+      <span>AM<small>MENTORIA&nbsp;EMPRESARIAL</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="#sobre">Sobre</a>
+      <a href="#atuacao">Atuação</a>
+      <a href="#trajetoria">Trajetória</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <a href="#contato" class="nav-cta">Agendar conversa</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Mentoria &amp; Consultoria de Gestão</div>
+        <h1 class="headline">Clareza para decidir,<br><em>estrutura</em> para crescer.</h1>
+        <p class="hero-sub">Adriana Moreira ajuda empresas de Campos dos Goytacazes a organizar processos, desenvolver equipes e transformar gestão administrativa em resultado — com mais de 15 anos de experiência em negócios, RH e logística.</p>
+        <div class="hero-actions">
+          <a href="#contato" class="btn-primary">Agendar uma conversa</a>
+          <a href="#trajetoria" class="btn-ghost">Ver trajetória</a>
+        </div>
+      </div>
+      <div class="hero-portrait">
+        <svg class="ring-arc" viewBox="0 0 400 430" fill="none">
+          <circle cx="200" cy="205" r="188" stroke="#c7a45f" stroke-width="1" opacity="0.35"/>
+          <path d="M32 260 A188 188 0 0 1 330 90" stroke="#e6c986" stroke-width="1.6" stroke-linecap="round" opacity="0.9"/>
+        </svg>
+        <div class="portrait-frame">
+          <img src="assets/logo.png" alt="AM Mentoria Empresarial" class="logo-full">
+        </div>
+        <div class="portrait-caption">
+          <strong>Adriana Moreira</strong>
+          <span>Mentoria Empresarial</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-cue"><span class="line"></span>Role para conhecer</div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Sobre</div>
+        <h2>Quinze anos construindo gestão que funciona na prática.</h2>
+      </div>
+      <div class="about-grid">
+        <div class="reveal">
+          <p>Profissional com <strong>mais de 15 anos de atuação na área administrativa</strong>, passando por gestão de negócios, vendas, RH e consultoria técnica voltada ao desenvolvimento profissional em administração e logística.</p>
+          <p>Seu propósito é <strong>levar engajamento às equipes</strong> em busca de melhores resultados, refletidos em indicadores de negócio (BI). A trajetória passa por instituições financeiras, clínicas de diagnóstico por imagem, ensino superior e técnico profissionalizante, e empresas de logística.</p>
+          <p>Sólidos conhecimentos na <strong>implantação de estratégias de negócio</strong> para potencializar oportunidades e resultados, com foco em análise de mercado, negociação e atendimento ao cliente.</p>
+        </div>
+        <div class="stat-list reveal">
+          <div class="stat">
+            <span class="num">15+</span>
+            <span class="label">Anos de experiência em gestão administrativa e RH</span>
+          </div>
+          <div class="stat">
+            <span class="num">20</span>
+            <span class="label">Profissionais liderados simultaneamente em equipe multidisciplinar</span>
+          </div>
+          <div class="stat">
+            <span class="num">6º</span>
+            <span class="label">Lugar nacional entre 159 unidades do SEST SENAT</span>
+          </div>
+          <div class="stat">
+            <span class="num">5+</span>
+            <span class="label">Setores de mercado atendidos: financeiro, saúde, educação, logística</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATUAÇÃO -->
+  <section id="atuacao">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Áreas de Atuação</div>
+        <h2>Mentoria e treinamento onde a gestão mais precisa.</h2>
+        <p>Cada frente de trabalho nasce de experiência real dentro das empresas — não de teoria de manual.</p>
+      </div>
+      <div class="expertise-grid reveal">
+        <div class="expertise-card">
+          <span class="idx">01</span>
+          <h3>Mentoria Empresarial</h3>
+          <p>Diagnóstico de gestão, organização de processos administrativos e planejamento estratégico para pequenas e médias empresas.</p>
+        </div>
+        <div class="expertise-card">
+          <span class="idx">02</span>
+          <h3>Treinamento de RH</h3>
+          <p>Programas de capacitação, desenvolvimento de equipes e rotinas de departamento pessoal alinhadas à legislação trabalhista.</p>
+        </div>
+        <div class="expertise-card">
+          <span class="idx">03</span>
+          <h3>Gestão de Contratos</h3>
+          <p>Elaboração, negociação e acompanhamento de contratos de prestação de serviços, compras e licitações.</p>
+        </div>
+        <div class="expertise-card">
+          <span class="idx">04</span>
+          <h3>Controle de Custos</h3>
+          <p>Análise financeira, auditorias documentais e indicadores de desempenho voltados à redução de desperdício.</p>
+        </div>
+        <div class="expertise-card">
+          <span class="idx">05</span>
+          <h3>Logística &amp; Operações</h3>
+          <p>Gestão de estoque, fluxo de compras, ERP/SAP e organização de cadeia de suprimentos.</p>
+        </div>
+        <div class="expertise-card">
+          <span class="idx">06</span>
+          <h3>Negociação &amp; Vendas</h3>
+          <p>Estratégias comerciais, relacionamento com clientes e desenvolvimento de propostas de valor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAJETÓRIA -->
+  <section id="trajetoria">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Trajetória</div>
+        <h2>Uma carreira construída dentro da operação.</h2>
+        <p>Da logística de transportes à coordenação pedagógica — a mesma disciplina de gestão aplicada a diferentes mercados.</p>
+      </div>
+      <div class="timeline reveal">
+        <div class="t-item">
+          <div class="t-year">2024 —</div>
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <h3>Coordenadora de Cursos de Graduação</h3>
+            <div class="org">Estácio · Administração, RH e Ciências Contábeis</div>
+            <p>Gestão pedagógica, planejamento de matriz curricular e acompanhamento de indicadores de qualidade e mercado de trabalho.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-year">2022 – 2025</div>
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <h3>Professora de Administração e afins</h3>
+            <div class="org">IFF — Instituto Federal Fluminense</div>
+            <p>Formação técnica e superior em administração, com foco em gestão e desenvolvimento profissional.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-year">2018 – 2021</div>
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <h3>Coordenadora Pedagógica</h3>
+            <div class="org">SEST SENAT · Desenvolvimento Profissional</div>
+            <p>Liderança de equipe de 20 profissionais, criação de programas de treinamento com foco em QSMS e representação do Núcleo Pedagógico do RJ junto à matriz nacional.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-year">2017 – 2019</div>
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <h3>Administradora / Assessora Especial</h3>
+            <div class="org">Prefeitura Municipal de Campos dos Goytacazes · Vigilância em Saúde</div>
+            <p>Gestão de equipe, análise financeira, contratos de prestação de serviços e gestão de estoque e insumos.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-year">2011 – 2017</div>
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <h3>Docente e Coordenadora de Cursos</h3>
+            <div class="org">SENAC RJ · Unidade Campos</div>
+            <p>Cursos técnicos em Administração, Logística e RH; construção de PPCs e desenvolvimento de metodologia de ensino.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-year">2001 – 2012</div>
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <h3>Gestão de Negócios &amp; Logística</h3>
+            <div class="org">Unicred · Ultramed Diagnósticos · Tamasa Transportes</div>
+            <p>Base da carreira: atendimento bancário PF/PJ, gestão administrativa e financeira, e operação logística de transporte de cargas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESTAQUE -->
+  <section>
+    <div class="wrap">
+      <div class="highlight reveal">
+        <div class="quote-mark">"</div>
+        <p>Engajar equipes é o que transforma processo em resultado — a gestão só faz sentido quando as pessoas crescem junto com o negócio.</p>
+        <div class="attribution">Adriana Moreira · Fundadora, AM Mentoria Empresarial</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato">
+    <div class="wrap">
+      <div class="contact-panel reveal">
+        <div class="contact-left">
+          <h2>Vamos organizar a gestão da sua empresa.</h2>
+          <p>Marque uma conversa inicial para entender onde a mentoria pode gerar mais resultado para o seu negócio em Campos dos Goytacazes.</p>
+          <a href="mailto:contato@ammentoria.com.br" class="btn-primary">Enviar e-mail</a>
+        </div>
+        <div class="contact-right">
+          <div class="contact-row">
+            <span class="k">E-mail</span>
+            <a href="mailto:contato@ammentoria.com.br" class="v">contato@ammentoria.com.br</a>
+          </div>
+          <div class="contact-row">
+            <span class="k">LinkedIn</span>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="v">Adriana Moreira</a>
+          </div>
+          <div class="contact-row">
+            <span class="k">Localização</span>
+            <span class="v">Campos dos Goytacazes, RJ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">AM Mentoria Empresarial · Adriana Moreira · © <span id="year"></span></div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>

@@ -10,587 +10,242 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg-deep:#12161c;
-    --bg-panel:#191f27;
-    --bg-panel-2:#1e2530;
-    --gold:#c7a45f;
-    --gold-soft:#8f7a4f;
-    --gold-light:#e6c986;
-    --cream:#f3ede0;
-    --slate:#9aa4b0;
-    --slate-dim:#6b7480;
-    --line:rgba(199,164,95,0.22);
+    /* ---- Navy + gray system ---- */
+    --bg-deep:#12161c;       /* tom original: hero, contato */
+    --bg-panel:#191f27;      /* subtom: atuação panel */
+    --bg-panel-2:#1e2530;    /* card surfaces on dark */
+    --gold:#c7a45f;          /* interactive accent on dark (tom original) */
+    --gold-light:#e6c986;    /* headline emphasis / links on dark */
+    --gray-50:#f4f3f0;       /* subtom novo: cinza mais claro (sobre / dores) */
+    --gray-100:#e9e7e2;      /* light panel surfaces */
+    --gray-200:#dcd9d2;      /* light borders */
+    --ink:#22252b;           /* body text on light bg */
+    --slate:#61686f;         /* muted text on light */
+    --cream:#f3ede0;         /* body text on dark bg (tom original) */
+    --slate-dark:#9aa4b0;    /* muted text on dark */
+    --line-dark:rgba(199,164,95,0.22);
+    --line-light:rgba(34,37,43,0.10);
+    --whatsapp:#3fae5c;
     --serif:'Cormorant Garamond', serif;
     --sans:'Work Sans', sans-serif;
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
-
   html{scroll-behavior:smooth;}
-
   body{
-    background:var(--bg-deep);
-    color:var(--cream);
+    background:var(--gray-50);
+    color:var(--ink);
     font-family:var(--sans);
     font-weight:300;
     line-height:1.6;
     overflow-x:hidden;
   }
-
   a{color:inherit;text-decoration:none;}
-
   img{max-width:100%;display:block;}
+  button{font-family:inherit;cursor:pointer;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+  ::selection{background:var(--gold);color:#fff;}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
 
-  .wrap{
-    max-width:1120px;
-    margin:0 auto;
-    padding:0 32px;
-  }
-
-  ::selection{background:var(--gold);color:var(--bg-deep);}
-
-  :focus-visible{
-    outline:2px solid var(--gold-light);
-    outline-offset:3px;
-  }
-
-  /* background texture: faint diagonal planes echoing the mark */
   .bg-planes{
-    position:fixed;
-    inset:0;
-    z-index:0;
-    pointer-events:none;
+    position:fixed;inset:0;z-index:0;pointer-events:none;
     background:
       linear-gradient(115deg, transparent 38%, rgba(255,255,255,0.02) 39%, rgba(255,255,255,0.02) 41%, transparent 42%),
-      linear-gradient(115deg, transparent 58%, rgba(255,255,255,0.015) 59%, rgba(255,255,255,0.015) 60.4%, transparent 61.4%),
       radial-gradient(ellipse 900px 600px at 82% -6%, rgba(199,164,95,0.10), transparent 60%);
   }
 
   /* ---------- NAV ---------- */
   header{
-    position:fixed;
-    top:0;left:0;right:0;
-    z-index:50;
+    position:fixed;top:0;left:0;right:0;z-index:50;
     background:rgba(18,22,28,0.72);
     backdrop-filter:blur(10px);
     border-bottom:1px solid rgba(255,255,255,0.06);
   }
-  nav.wrap{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    height:76px;
-  }
-  .brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    font-family:var(--serif);
-    font-size:1.3rem;
-    letter-spacing:0.03em;
-    color:var(--cream);
-  }
-  .brand .mark{
-    width:38px;height:38px;
-    border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    position:relative;
-    overflow:hidden;
-    flex-shrink:0;
-  }
+  nav.wrap{display:flex;align-items:center;justify-content:space-between;height:76px;}
+  .brand{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-size:1.3rem;letter-spacing:0.03em;color:var(--cream);}
+  .brand .mark{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;background:var(--bg-panel-2);}
   .brand .mark img{width:100%;height:100%;object-fit:cover;}
-  .brand small{
-    display:block;
-    font-family:var(--sans);
-    font-size:0.58rem;
-    letter-spacing:0.22em;
-    color:var(--slate);
-    font-weight:400;
-    margin-top:2px;
-  }
-  .nav-links{
-    display:flex;
-    gap:40px;
-    font-size:0.82rem;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    color:var(--slate);
-  }
-  .nav-links a{
-    position:relative;
-    padding:6px 0;
-    transition:color .25s ease;
-  }
+  .brand small{display:block;font-family:var(--sans);font-size:0.58rem;letter-spacing:0.22em;color:var(--slate-dark);font-weight:400;margin-top:2px;}
+  .nav-links{display:flex;gap:40px;font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--slate-dark);}
+  .nav-links a{position:relative;padding:6px 0;transition:color .25s ease;}
   .nav-links a:hover{color:var(--gold-light);}
-  .nav-links a::after{
-    content:'';
-    position:absolute;left:0;bottom:0;
-    width:0;height:1px;
-    background:var(--gold);
-    transition:width .3s ease;
-  }
+  .nav-links a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);transition:width .3s ease;}
   .nav-links a:hover::after{width:100%;}
   .nav-cta{
-    border:1px solid var(--line);
-    padding:9px 20px;
-    border-radius:2px;
-    font-size:0.78rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--gold-light);
-    transition:all .25s ease;
-    white-space:nowrap;
+    display:flex;align-items:center;gap:8px;
+    border:1px solid var(--line-dark);padding:9px 20px;border-radius:2px;
+    font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold-light);
+    transition:all .25s ease;white-space:nowrap;
   }
-  .nav-cta:hover{background:var(--gold);border-color:var(--gold);color:var(--bg-deep);}
-  .nav-toggle{display:none;}
+  .nav-cta:hover{background:var(--whatsapp);border-color:var(--whatsapp);color:#fff;}
 
   /* ---------- HERO ---------- */
-  .hero{
-    position:relative;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    padding-top:76px;
-    z-index:1;
-  }
-  .hero-grid{
-    display:grid;
-    grid-template-columns:1.1fr 0.9fr;
-    gap:60px;
-    align-items:center;
-    width:100%;
-  }
-  .eyebrow{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    font-size:0.78rem;
-    letter-spacing:0.24em;
-    text-transform:uppercase;
-    color:var(--gold);
-    margin-bottom:28px;
-  }
-  .eyebrow::before{
-    content:'';
-    width:36px;height:1px;
-    background:var(--gold);
-  }
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding-top:76px;z-index:1;background:var(--bg-deep);color:var(--cream);}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;width:100%;}
+  .eyebrow{display:flex;align-items:center;gap:14px;font-size:0.78rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold-light);margin-bottom:28px;
+    opacity:0;transform:translateY(10px);animation:fadeUp .8s ease .1s forwards;}
+  .eyebrow::before{content:'';width:36px;height:1px;background:var(--gold);}
   h1.headline{
-    font-family:var(--serif);
-    font-weight:500;
-    font-size:clamp(2.6rem, 5vw, 4.2rem);
-    line-height:1.06;
-    color:var(--cream);
-    margin-bottom:26px;
-    letter-spacing:0.005em;
+    font-family:var(--serif);font-weight:500;font-size:clamp(2.6rem, 5vw, 4.2rem);line-height:1.08;color:var(--cream);margin-bottom:26px;letter-spacing:0.005em;
+    opacity:0;transform:translateY(16px);animation:fadeUp .9s ease .25s forwards;
   }
-  h1.headline em{
-    font-style:italic;
-    color:var(--gold-light);
-    font-weight:400;
-  }
-  .hero-sub{
-    font-size:1.06rem;
-    color:var(--slate);
-    max-width:480px;
-    margin-bottom:38px;
-    font-weight:300;
-  }
-  .hero-actions{
-    display:flex;
-    align-items:center;
-    gap:28px;
-    flex-wrap:wrap;
-  }
+  h1.headline em{font-style:italic;color:var(--gold-light);font-weight:400;}
+  .hero-sub{font-size:1.06rem;color:var(--slate-dark);max-width:480px;margin-bottom:38px;font-weight:300;
+    opacity:0;transform:translateY(16px);animation:fadeUp .9s ease .4s forwards;}
+  .hero-actions{display:flex;align-items:center;gap:28px;flex-wrap:wrap;
+    opacity:0;transform:translateY(16px);animation:fadeUp .9s ease .55s forwards;}
+
+  @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+
   .btn-primary{
-    background:var(--gold);
-    color:var(--bg-deep);
-    padding:15px 32px;
-    border-radius:2px;
-    font-size:0.82rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    font-weight:500;
-    transition:all .25s ease;
-    display:inline-block;
-  }
-  .btn-primary:hover{background:var(--gold-light);transform:translateY(-1px);}
-  .btn-ghost{
-    font-size:0.82rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--slate);
-    border-bottom:1px solid var(--slate-dim);
-    padding-bottom:3px;
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--whatsapp);color:#fff;padding:15px 28px;border-radius:2px;
+    font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:500;
     transition:all .25s ease;
   }
+  .btn-primary:hover{background:#359350;transform:translateY(-1px);}
+  .btn-primary svg{width:16px;height:16px;flex-shrink:0;}
+  .btn-outline{
+    display:inline-flex;align-items:center;gap:10px;
+    border:1px solid var(--line-dark);color:var(--gold-light);padding:14px 26px;border-radius:2px;
+    font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;transition:all .25s ease;
+  }
+  .btn-outline:hover{border-color:var(--gold);background:rgba(199,164,95,0.12);}
+  .btn-ghost{font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--slate-dark);border-bottom:1px solid var(--slate-dark);padding-bottom:3px;transition:all .25s ease;}
   .btn-ghost:hover{color:var(--gold-light);border-color:var(--gold-light);}
 
-  .hero-portrait{
-    position:relative;
-    width:100%;
-    aspect-ratio:1/1.08;
-    max-width:340px;
-    justify-self:center;
-  }
-  .ring-arc{
-    position:absolute;
-    inset:-8%;
-    width:116%;height:116%;
-  }
-  .portrait-frame{
-    position:absolute;
-    inset:9%;
-    border-radius:8px;
-    overflow:hidden;
-    background:var(--bg-deep);
-    border:1px solid rgba(255,255,255,0.05);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:6%;
-  }
-  .portrait-frame .logo-full{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-  }
+  .hero-portrait{position:relative;width:100%;aspect-ratio:1/1.12;max-width:340px;justify-self:center;
+    opacity:0;animation:fadeUp 1s ease .3s forwards;}
+  .ring-arc{position:absolute;inset:-8%;width:116%;height:116%;}
+  .ring-arc circle{stroke-dasharray:1182;stroke-dashoffset:1182;animation:drawRing 1.6s ease .5s forwards;}
+  .ring-arc path{stroke-dasharray:420;stroke-dashoffset:420;animation:drawRing 1.4s ease .9s forwards;}
+  @keyframes drawRing{to{stroke-dashoffset:0;}}
+  .portrait-frame{position:absolute;inset:9%;border-radius:8px;overflow:hidden;background:var(--bg-panel);border:1px solid rgba(255,255,255,0.06);}
+  .portrait-frame img{width:100%;height:100%;object-fit:cover;object-position:top center;}
   .portrait-caption{
-    position:absolute;
-    bottom:-2px;left:9%;right:9%;
-    background:var(--bg-panel);
-    border:1px solid var(--line);
-    padding:14px 18px;
-    transform:translateY(50%);
-    text-align:center;
+    position:absolute;bottom:-2px;left:9%;right:9%;background:var(--bg-panel-2);border:1px solid var(--line-dark);
+    padding:14px 18px;transform:translateY(50%);text-align:center;
   }
-  .portrait-caption strong{
-    display:block;
-    font-family:var(--serif);
-    font-size:1.15rem;
-    color:var(--cream);
-    font-weight:500;
-  }
-  .portrait-caption span{
-    display:block;
-    font-size:0.72rem;
-    letter-spacing:0.12em;
-    text-transform:uppercase;
-    color:var(--gold);
-    margin-top:4px;
-  }
+  .portrait-caption strong{display:block;font-family:var(--serif);font-size:1.15rem;color:var(--cream);font-weight:500;}
+  .portrait-caption span{display:block;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-light);margin-top:4px;}
 
-  .scroll-cue{
-    position:absolute;
-    bottom:38px;left:32px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    font-size:0.7rem;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    color:var(--slate-dim);
-  }
-  .scroll-cue .line{
-    width:1px;height:34px;
-    background:linear-gradient(var(--gold), transparent);
-  }
+  .scroll-cue{position:absolute;bottom:38px;left:32px;display:flex;align-items:center;gap:12px;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--slate-dark);}
+  .scroll-cue .line{width:1px;height:34px;background:linear-gradient(var(--gold), transparent);}
 
   /* ---------- SECTION BASICS ---------- */
-  section{
-    position:relative;
-    z-index:1;
-    padding:130px 0;
-  }
-  .section-head{
-    margin-bottom:64px;
-    max-width:640px;
-  }
-  .section-head .eyebrow{margin-bottom:18px;}
-  .section-head h2{
-    font-family:var(--serif);
-    font-weight:500;
-    font-size:clamp(2rem, 3.4vw, 2.8rem);
-    color:var(--cream);
-    line-height:1.15;
-  }
-  .section-head p{
-    color:var(--slate);
-    margin-top:18px;
-    font-size:1.02rem;
-    max-width:560px;
-  }
-  .divider{
-    height:1px;
-    background:linear-gradient(90deg, var(--line), transparent);
-    margin:0;
-  }
+  section{position:relative;z-index:1;padding:130px 0;}
+  .section-head{margin-bottom:64px;max-width:640px;}
+  .section-head .eyebrow{opacity:1;transform:none;animation:none;}
+  .section-head h2{font-family:var(--serif);font-weight:500;font-size:clamp(2rem, 3.4vw, 2.8rem);line-height:1.15;}
+  .section-head p{margin-top:18px;font-size:1.02rem;max-width:560px;}
 
-  /* ---------- SOBRE ---------- */
-  #sobre{background:var(--bg-panel);}
-  .about-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:80px;
-    align-items:start;
-  }
-  .about-grid p{
-    color:var(--slate);
-    font-size:1.03rem;
-    margin-bottom:20px;
-  }
-  .about-grid p strong{color:var(--cream);font-weight:500;}
-  .stat-list{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-  }
-  .stat{
-    background:var(--bg-panel);
-    padding:32px 26px;
-  }
-  .stat .num{
-    font-family:var(--serif);
-    font-size:2.6rem;
-    color:var(--gold-light);
-    font-weight:500;
-    line-height:1;
-  }
-  .stat .label{
-    display:block;
-    margin-top:10px;
-    font-size:0.8rem;
-    color:var(--slate);
-    letter-spacing:0.02em;
-  }
+  /* light sections */
+  .on-light{background:var(--gray-50);color:var(--ink);}
+  .on-light .eyebrow{color:var(--gold);}
+  .on-light .eyebrow::before{background:var(--gold);}
+  .on-light .section-head p, .on-light .muted{color:var(--slate);}
 
-  /* ---------- ATUAÇÃO / ESPECIALIDADES ---------- */
-  .expertise-grid{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-  }
-  .expertise-card{
-    background:var(--bg-deep);
-    padding:40px 34px;
-    transition:background .3s ease;
-  }
-  .expertise-card:hover{background:var(--bg-panel-2);}
-  .expertise-card .idx{
-    font-family:var(--serif);
-    font-size:0.85rem;
-    color:var(--gold-soft);
-    letter-spacing:0.1em;
-    margin-bottom:20px;
-    display:block;
-  }
-  .expertise-card h3{
-    font-family:var(--serif);
-    font-size:1.4rem;
-    font-weight:500;
-    color:var(--cream);
-    margin-bottom:12px;
-  }
-  .expertise-card p{
-    color:var(--slate);
-    font-size:0.92rem;
-  }
+  /* dark / subtom sections */
+  .on-dark{background:var(--bg-panel);color:var(--cream);}
+  .on-dark .eyebrow{color:var(--gold-light);}
+  .on-dark .eyebrow::before{background:var(--gold-light);}
+  .on-dark .section-head p, .on-dark .muted{color:var(--slate-dark);}
 
-  /* ---------- TRAJETÓRIA / TIMELINE ---------- */
-  #trajetoria{background:var(--bg-panel);}
-  .timeline{
-    position:relative;
-    max-width:760px;
-  }
-  .timeline::before{
-    content:'';
-    position:absolute;
-    left:118px;
-    top:8px;bottom:8px;
-    width:1px;
-    background:linear-gradient(var(--line), rgba(199,164,95,0.5), var(--line));
-  }
-  .t-item{
-    position:relative;
-    display:grid;
-    grid-template-columns:100px 1fr;
-    gap:18px;
-    padding:0 0 52px 0;
-  }
-  .t-item:last-child{padding-bottom:0;}
-  .t-year{
-    font-family:var(--serif);
-    font-size:1.05rem;
-    color:var(--gold);
-    text-align:right;
-    padding-top:2px;
-  }
-  .t-dot{
-    position:absolute;
-    left:114px;top:6px;
-    width:9px;height:9px;
-    border-radius:50%;
-    background:var(--gold);
-    box-shadow:0 0 0 4px var(--bg-panel), 0 0 0 5px var(--line);
-  }
-  .t-content{padding-left:36px;}
-  .t-content h3{
-    font-family:var(--serif);
-    font-size:1.25rem;
-    font-weight:500;
-    color:var(--cream);
-    margin-bottom:6px;
-  }
-  .t-content .org{
-    font-size:0.78rem;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--slate-dim);
-    margin-bottom:10px;
-  }
-  .t-content p{
-    color:var(--slate);
-    font-size:0.94rem;
-  }
+  /* ---------- SOBRE + DORES ---------- */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+  .about-grid p{font-size:1.03rem;margin-bottom:20px;color:var(--slate);}
+  .about-grid p strong{color:var(--ink);font-weight:500;}
+  .stat-list{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-light);border:1px solid var(--line-light);}
+  .stat{background:#fff;padding:32px 26px;}
+  .stat .num{font-family:var(--serif);font-size:2.6rem;color:var(--gold);font-weight:500;line-height:1;}
+  .stat .label{display:block;margin-top:10px;font-size:0.8rem;color:var(--slate);letter-spacing:0.02em;}
 
-  /* ---------- DESTAQUE (achievement banner) ---------- */
-  .highlight{
-    position:relative;
-    padding:70px 60px;
-    border:1px solid var(--line);
-    background:
-      radial-gradient(ellipse 500px 300px at 90% 0%, rgba(199,164,95,0.08), transparent 70%),
-      var(--bg-deep);
-    text-align:center;
+  .pain-list{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-light);border:1px solid var(--line-light);margin-top:8px;}
+  .pain-item{background:#fff;padding:26px 28px;display:flex;gap:16px;align-items:flex-start;}
+  .pain-item .q{font-family:var(--serif);font-size:1.6rem;color:var(--gold);line-height:1;flex-shrink:0;}
+  .pain-item p{color:var(--slate);font-size:0.96rem;}
+  .pain-bridge{margin-top:46px;font-family:var(--serif);font-size:clamp(1.3rem,2.4vw,1.7rem);font-style:italic;color:var(--ink);max-width:680px;}
+  .pain-bridge em{color:var(--gold);font-style:italic;}
+
+  /* ---------- ATUAÇÃO / cards ---------- */
+  .expertise-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:1px;background:var(--line-dark);border:1px solid var(--line-dark);}
+  .expertise-card{background:var(--bg-panel-2);position:relative;}
+  .card-head{
+    width:100%;text-align:left;background:none;border:none;color:inherit;
+    padding:34px 30px;display:flex;flex-direction:column;gap:12px;transition:background .25s ease;
   }
-  .highlight .quote-mark{
-    font-family:var(--serif);
-    font-size:3.5rem;
-    color:var(--gold-soft);
-    line-height:1;
-    margin-bottom:10px;
+  .card-head:hover{background:rgba(168,200,236,0.06);}
+  .card-head .tag{font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-light);}
+  .card-head h3{font-family:var(--serif);font-size:1.32rem;font-weight:500;color:var(--cream);}
+  .card-head .pain-line{color:var(--slate-dark);font-size:0.88rem;}
+  .card-head .toggle-row{display:flex;align-items:center;justify-content:space-between;margin-top:6px;}
+  .card-head .cta-hint{font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold-light);}
+  .card-head .chevron{width:18px;height:18px;transition:transform .3s ease;flex-shrink:0;}
+  .expertise-card.open .chevron{transform:rotate(45deg);}
+
+  .card-body{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+  .expertise-card.open .card-body{max-height:520px;}
+  .course-list{padding:0 30px 30px;display:flex;flex-direction:column;gap:1px;background:var(--line-dark);border-top:1px solid var(--line-dark);}
+  .course-list a{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    background:var(--bg-panel);padding:14px 16px;font-size:0.86rem;color:var(--cream);
+    transition:background .2s ease,color .2s ease;
   }
-  .highlight p{
-    font-family:var(--serif);
-    font-size:clamp(1.4rem, 2.6vw, 1.9rem);
-    font-style:italic;
-    color:var(--cream);
-    max-width:760px;
-    margin:0 auto 24px;
-    line-height:1.4;
-  }
-  .highlight .attribution{
-    font-size:0.78rem;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--gold);
-  }
+  .course-list a:hover{background:var(--whatsapp);color:#fff;}
+  .course-list a svg{width:14px;height:14px;flex-shrink:0;opacity:0.8;}
+
+  /* ---------- DESTAQUE ---------- */
+  .highlight{position:relative;padding:70px 60px;border:1px solid var(--line-light);background:#fff;text-align:center;}
+  .highlight .quote-mark{font-family:var(--serif);font-size:3.5rem;color:var(--gold);line-height:1;margin-bottom:10px;}
+  .highlight p{font-family:var(--serif);font-size:clamp(1.4rem, 2.6vw, 1.9rem);font-style:italic;color:var(--ink);max-width:760px;margin:0 auto 24px;line-height:1.4;}
+  .highlight .attribution{font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);}
 
   /* ---------- CONTATO ---------- */
-  #contato{
-    background:var(--bg-panel);
-    padding-bottom:0;
-  }
-  .contact-panel{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:0;
-    border:1px solid var(--line);
-  }
-  .contact-left{
-    padding:64px 56px;
-    background:var(--bg-deep);
-  }
-  .contact-left h2{
-    font-family:var(--serif);
-    font-weight:500;
-    font-size:clamp(1.9rem, 3.2vw, 2.5rem);
-    color:var(--cream);
-    margin-bottom:20px;
-    line-height:1.2;
-  }
-  .contact-left p{
-    color:var(--slate);
-    margin-bottom:36px;
-    max-width:420px;
-  }
-  .contact-right{
-    padding:64px 56px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    gap:26px;
-  }
-  .contact-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:baseline;
-    border-bottom:1px solid rgba(255,255,255,0.07);
-    padding-bottom:20px;
-  }
-  .contact-row .k{
-    font-size:0.74rem;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--slate-dim);
-  }
-  .contact-row .v{
-    font-family:var(--serif);
-    font-size:1.15rem;
-    color:var(--gold-light);
-  }
+  #contato{background:var(--bg-deep);color:var(--cream);padding-bottom:0;}
+  .contact-panel{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line-dark);}
+  .contact-left{padding:64px 56px;background:var(--bg-panel);}
+  .contact-left h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem, 3.2vw, 2.5rem);color:var(--cream);margin-bottom:20px;line-height:1.2;}
+  .contact-left p{color:var(--slate-dark);margin-bottom:36px;max-width:420px;}
+  .contact-right{padding:64px 56px;display:flex;flex-direction:column;justify-content:center;gap:26px;}
+  .contact-row{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:20px;}
+  .contact-row .k{font-size:0.74rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--slate-dark);}
+  .contact-row .v{font-family:var(--serif);font-size:1.15rem;color:var(--gold-light);}
   .contact-row a.v:hover{color:var(--cream);}
 
-  footer{
-    padding:34px 0;
-    text-align:center;
-    font-size:0.75rem;
-    letter-spacing:0.06em;
-    color:var(--slate-dim);
-    border-top:1px solid rgba(255,255,255,0.06);
-    margin-top:0;
+  /* floating WhatsApp button */
+  .wa-float{
+    position:fixed;right:24px;bottom:24px;z-index:60;
+    width:58px;height:58px;border-radius:50%;background:var(--whatsapp);
+    display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,0.28);
+    animation:pulse 2.6s ease-in-out infinite;
   }
+  .wa-float svg{width:28px;height:28px;fill:#fff;}
+  .wa-float:hover{animation-play-state:paused;transform:scale(1.06);}
+  @keyframes pulse{0%,100%{box-shadow:0 6px 20px rgba(63,174,92,0.35);}50%{box-shadow:0 6px 26px rgba(63,174,92,0.65);}}
+
+  footer{padding:34px 0;text-align:center;font-size:0.75rem;letter-spacing:0.06em;color:var(--slate-dark);border-top:1px solid rgba(255,255,255,0.06);background:var(--bg-deep);}
 
   /* ---------- REVEAL ---------- */
-  .reveal{
-    opacity:0;
-    transform:translateY(24px);
-    transition:opacity .8s ease, transform .8s ease;
-  }
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease;}
   .reveal.in{opacity:1;transform:translateY(0);}
 
   @media (prefers-reduced-motion: reduce){
     *{transition:none !important;animation:none !important;}
     html{scroll-behavior:auto;}
-    .reveal{opacity:1;transform:none;}
+    .reveal,.eyebrow,h1.headline,.hero-sub,.hero-actions,.hero-portrait{opacity:1;transform:none;}
   }
 
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 900px){
     .hero-grid{grid-template-columns:1fr;gap:56px;}
-    .hero-portrait{
-      order:-1;
-      width:100%;
-      max-width:230px;
-      margin:0 auto;
-      aspect-ratio:1/1;
-    }
+    .hero-portrait{order:-1;width:100%;max-width:230px;margin:0 auto;aspect-ratio:1/1;}
     .ring-arc{display:none;}
-    .portrait-frame{inset:0;border-radius:12px;padding:8%;}
-    .portrait-caption{
-      position:static;
-      transform:none;
-      max-width:230px;
-      margin:16px auto 0;
-      border-radius:2px;
-    }
+    .portrait-frame{inset:0;border-radius:12px;}
+    .portrait-caption{position:static;transform:none;max-width:230px;margin:16px auto 0;border-radius:2px;}
     .hero{padding-top:96px;}
     .about-grid{grid-template-columns:1fr;gap:44px;}
     .expertise-grid{grid-template-columns:1fr 1fr;}
+    .pain-list{grid-template-columns:1fr;}
     .contact-panel{grid-template-columns:1fr;}
     .nav-links{display:none;}
   }
@@ -601,14 +256,10 @@
     .eyebrow{flex-wrap:wrap;row-gap:8px;}
     .expertise-grid{grid-template-columns:1fr;}
     .stat-list{grid-template-columns:1fr;}
-    .timeline::before{left:14px;}
-    .t-item{grid-template-columns:1fr;}
-    .t-year{text-align:left;padding-left:36px;}
-    .t-dot{left:10px;}
-    .t-content{padding-left:36px;}
     .highlight{padding:48px 26px;}
     .contact-left,.contact-right{padding:44px 26px;}
     .nav-cta{display:none;}
+    .wa-float{right:16px;bottom:16px;width:52px;height:52px;}
   }
 </style>
 </head>
@@ -626,11 +277,14 @@
     </a>
     <div class="nav-links">
       <a href="#sobre">Sobre</a>
-      <a href="#atuacao">Atuação</a>
-      <a href="#trajetoria">Trajetória</a>
+      <a href="#dores">Desafios</a>
+      <a href="#atuacao">Como ajudo</a>
       <a href="#contato">Contato</a>
     </div>
-    <a href="#contato" class="nav-cta">Agendar conversa</a>
+    <a id="nav-wa" href="#" target="_blank" rel="noopener" class="nav-cta">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2zm0 18.11h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.25 8.24z"/></svg>
+      WhatsApp
+    </a>
   </nav>
 </header>
 
@@ -641,11 +295,14 @@
     <div class="wrap hero-grid">
       <div>
         <div class="eyebrow">Mentoria &amp; Consultoria de Gestão</div>
-        <h1 class="headline">Clareza para decidir,<br><em>estrutura</em> para crescer.</h1>
-        <p class="hero-sub">Adriana Moreira ajuda empresas de Campos dos Goytacazes a organizar processos, desenvolver equipes e transformar gestão administrativa em resultado — com mais de 15 anos de experiência em negócios, RH e logística.</p>
+        <h1 class="headline">Sua empresa cresce,<br>mas a gestão <em>não acompanha</em>?</h1>
+        <p class="hero-sub">Em poucos minutos você vai ver os sinais mais comuns de desorganização na gestão — e o caminho que Adriana Moreira usa há mais de 15 anos para transformar isso em estrutura, indicadores e equipe engajada.</p>
         <div class="hero-actions">
-          <a href="#contato" class="btn-primary">Agendar uma conversa</a>
-          <a href="#trajetoria" class="btn-ghost">Ver trajetória</a>
+          <a id="hero-wa" href="#" target="_blank" rel="noopener" class="btn-primary">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2zm0 18.11h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.25 8.24z"/></svg>
+            Falar no WhatsApp
+          </a>
+          <a href="#dores" class="btn-ghost">Ver os sinais de alerta</a>
         </div>
       </div>
       <div class="hero-portrait">
@@ -654,7 +311,7 @@
           <path d="M32 260 A188 188 0 0 1 330 90" stroke="#e6c986" stroke-width="1.6" stroke-linecap="round" opacity="0.9"/>
         </svg>
         <div class="portrait-frame">
-          <img src="assets/logo.png" alt="AM Mentoria Empresarial" class="logo-full">
+          <img src="assets/rosto%20adriana.jpg" alt="Adriana Moreira">
         </div>
         <div class="portrait-caption">
           <strong>Adriana Moreira</strong>
@@ -666,17 +323,16 @@
   </section>
 
   <!-- SOBRE -->
-  <section id="sobre">
+  <section id="sobre" class="on-light">
     <div class="wrap">
       <div class="section-head reveal">
         <div class="eyebrow">Sobre</div>
-        <h2>Quinze anos construindo gestão que funciona na prática.</h2>
+        <h2>Quinze anos dentro da operação, não atrás de um manual.</h2>
       </div>
       <div class="about-grid">
         <div class="reveal">
-          <p>Profissional com <strong>mais de 15 anos de atuação na área administrativa</strong>, passando por gestão de negócios, vendas, RH e consultoria técnica voltada ao desenvolvimento profissional em administração e logística.</p>
-          <p>Seu propósito é <strong>levar engajamento às equipes</strong> em busca de melhores resultados, refletidos em indicadores de negócio (BI). A trajetória passa por instituições financeiras, clínicas de diagnóstico por imagem, ensino superior e técnico profissionalizante, e empresas de logística.</p>
-          <p>Sólidos conhecimentos na <strong>implantação de estratégias de negócio</strong> para potencializar oportunidades e resultados, com foco em análise de mercado, negociação e atendimento ao cliente.</p>
+          <p>Adriana atua há <strong>mais de 15 anos na área administrativa</strong>, passando por gestão de negócios, vendas, RH e consultoria técnica em administração e logística — em instituições financeiras, clínicas, ensino profissionalizante e empresas de logística.</p>
+          <p>Seu foco é simples: <strong>engajar equipes</strong> para que a gestão gere resultado de verdade, medido em indicadores de negócio — não em planilhas que ninguém olha.</p>
         </div>
         <div class="stat-list reveal">
           <div class="stat">
@@ -689,7 +345,7 @@
           </div>
           <div class="stat">
             <span class="num">6º</span>
-            <span class="label">Lugar nacional entre 159 unidades do SEST SENAT</span>
+            <span class="label">Lugar nacional entre 159 unidades em programa de treinamento</span>
           </div>
           <div class="stat">
             <span class="num">5+</span>
@@ -700,118 +356,39 @@
     </div>
   </section>
 
-  <!-- ATUAÇÃO -->
-  <section id="atuacao">
+  <!-- DORES -->
+  <section id="dores" class="on-light" style="padding-top:0;">
     <div class="wrap">
       <div class="section-head reveal">
-        <div class="eyebrow">Áreas de Atuação</div>
-        <h2>Mentoria e treinamento onde a gestão mais precisa.</h2>
-        <p>Cada frente de trabalho nasce de experiência real dentro das empresas — não de teoria de manual.</p>
+        <div class="eyebrow">Desafios comuns</div>
+        <h2>Reconhece alguma dessas situações na sua empresa?</h2>
       </div>
-      <div class="expertise-grid reveal">
-        <div class="expertise-card">
-          <span class="idx">01</span>
-          <h3>Mentoria Empresarial</h3>
-          <p>Diagnóstico de gestão, organização de processos administrativos e planejamento estratégico para pequenas e médias empresas.</p>
-        </div>
-        <div class="expertise-card">
-          <span class="idx">02</span>
-          <h3>Treinamento de RH</h3>
-          <p>Programas de capacitação, desenvolvimento de equipes e rotinas de departamento pessoal alinhadas à legislação trabalhista.</p>
-        </div>
-        <div class="expertise-card">
-          <span class="idx">03</span>
-          <h3>Gestão de Contratos</h3>
-          <p>Elaboração, negociação e acompanhamento de contratos de prestação de serviços, compras e licitações.</p>
-        </div>
-        <div class="expertise-card">
-          <span class="idx">04</span>
-          <h3>Controle de Custos</h3>
-          <p>Análise financeira, auditorias documentais e indicadores de desempenho voltados à redução de desperdício.</p>
-        </div>
-        <div class="expertise-card">
-          <span class="idx">05</span>
-          <h3>Logística &amp; Operações</h3>
-          <p>Gestão de estoque, fluxo de compras, ERP/SAP e organização de cadeia de suprimentos.</p>
-        </div>
-        <div class="expertise-card">
-          <span class="idx">06</span>
-          <h3>Negociação &amp; Vendas</h3>
-          <p>Estratégias comerciais, relacionamento com clientes e desenvolvimento de propostas de valor.</p>
-        </div>
+      <div class="pain-list reveal">
+        <div class="pain-item"><span class="q">?</span><p>Quase tudo depende de você — se você para, a operação trava.</p></div>
+        <div class="pain-item"><span class="q">?</span><p>A equipe não tem clareza sobre papéis, metas e o que é resultado.</p></div>
+        <div class="pain-item"><span class="q">?</span><p>Contratos e fornecedores são acompanhados "no olho", sem controle formal.</p></div>
+        <div class="pain-item"><span class="q">?</span><p>Custos sobem e ninguém consegue explicar exatamente onde.</p></div>
+        <div class="pain-item"><span class="q">?</span><p>Faltam indicadores confiáveis para decidir com segurança.</p></div>
+        <div class="pain-item"><span class="q">?</span><p>Rotatividade alta e equipe pouco engajada com o negócio.</p></div>
       </div>
+      <p class="pain-bridge reveal">Não é falta de esforço — é falta de <em>estrutura</em>. É exatamente aí que a mentoria entra.</p>
     </div>
   </section>
 
-  <!-- TRAJETÓRIA -->
-  <section id="trajetoria">
+  <!-- ATUAÇÃO -->
+  <section id="atuacao" class="on-dark">
     <div class="wrap">
       <div class="section-head reveal">
-        <div class="eyebrow">Trajetória</div>
-        <h2>Uma carreira construída dentro da operação.</h2>
-        <p>Da logística de transportes à coordenação pedagógica — a mesma disciplina de gestão aplicada a diferentes mercados.</p>
+        <div class="eyebrow">Como ajudo</div>
+        <h2>Escolha a área que mais pesa hoje.</h2>
+        <p>Clique em uma frente de trabalho para ver as opções de mentoria dentro dela — e já direcionar sua dúvida direto para o WhatsApp da Adriana.</p>
       </div>
-      <div class="timeline reveal">
-        <div class="t-item">
-          <div class="t-year">2024 —</div>
-          <div class="t-dot"></div>
-          <div class="t-content">
-            <h3>Coordenadora de Cursos de Graduação</h3>
-            <div class="org">Estácio · Administração, RH e Ciências Contábeis</div>
-            <p>Gestão pedagógica, planejamento de matriz curricular e acompanhamento de indicadores de qualidade e mercado de trabalho.</p>
-          </div>
-        </div>
-        <div class="t-item">
-          <div class="t-year">2022 – 2025</div>
-          <div class="t-dot"></div>
-          <div class="t-content">
-            <h3>Professora de Administração e afins</h3>
-            <div class="org">IFF — Instituto Federal Fluminense</div>
-            <p>Formação técnica e superior em administração, com foco em gestão e desenvolvimento profissional.</p>
-          </div>
-        </div>
-        <div class="t-item">
-          <div class="t-year">2018 – 2021</div>
-          <div class="t-dot"></div>
-          <div class="t-content">
-            <h3>Coordenadora Pedagógica</h3>
-            <div class="org">SEST SENAT · Desenvolvimento Profissional</div>
-            <p>Liderança de equipe de 20 profissionais, criação de programas de treinamento com foco em QSMS e representação do Núcleo Pedagógico do RJ junto à matriz nacional.</p>
-          </div>
-        </div>
-        <div class="t-item">
-          <div class="t-year">2017 – 2019</div>
-          <div class="t-dot"></div>
-          <div class="t-content">
-            <h3>Administradora / Assessora Especial</h3>
-            <div class="org">Prefeitura Municipal de Campos dos Goytacazes · Vigilância em Saúde</div>
-            <p>Gestão de equipe, análise financeira, contratos de prestação de serviços e gestão de estoque e insumos.</p>
-          </div>
-        </div>
-        <div class="t-item">
-          <div class="t-year">2011 – 2017</div>
-          <div class="t-dot"></div>
-          <div class="t-content">
-            <h3>Docente e Coordenadora de Cursos</h3>
-            <div class="org">SENAC RJ · Unidade Campos</div>
-            <p>Cursos técnicos em Administração, Logística e RH; construção de PPCs e desenvolvimento de metodologia de ensino.</p>
-          </div>
-        </div>
-        <div class="t-item">
-          <div class="t-year">2001 – 2012</div>
-          <div class="t-dot"></div>
-          <div class="t-content">
-            <h3>Gestão de Negócios &amp; Logística</h3>
-            <div class="org">Unicred · Ultramed Diagnósticos · Tamasa Transportes</div>
-            <p>Base da carreira: atendimento bancário PF/PJ, gestão administrativa e financeira, e operação logística de transporte de cargas.</p>
-          </div>
-        </div>
-      </div>
+      <div class="expertise-grid reveal" id="expertise-grid"></div>
     </div>
   </section>
 
   <!-- DESTAQUE -->
-  <section>
+  <section class="on-light" style="padding-top:0;">
     <div class="wrap">
       <div class="highlight reveal">
         <div class="quote-mark">"</div>
@@ -827,10 +404,17 @@
       <div class="contact-panel reveal">
         <div class="contact-left">
           <h2>Vamos organizar a gestão da sua empresa.</h2>
-          <p>Marque uma conversa inicial para entender onde a mentoria pode gerar mais resultado para o seu negócio em Campos dos Goytacazes.</p>
-          <a href="mailto:contato@ammentoria.com.br" class="btn-primary">Enviar e-mail</a>
+          <p>Marque uma conversa inicial pelo WhatsApp para entender onde a mentoria pode gerar mais resultado para o seu negócio em Campos dos Goytacazes.</p>
+          <a id="contato-wa" href="#" target="_blank" rel="noopener" class="btn-primary">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2zm0 18.11h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.25 8.24z"/></svg>
+            Falar no WhatsApp
+          </a>
         </div>
         <div class="contact-right">
+          <div class="contact-row">
+            <span class="k">WhatsApp</span>
+            <a id="contato-wa-row" href="#" target="_blank" rel="noopener" class="v">+55 (22) 99275-1411</a>
+          </div>
           <div class="contact-row">
             <span class="k">E-mail</span>
             <a href="mailto:contato@ammentoria.com.br" class="v">contato@ammentoria.com.br</a>
@@ -850,6 +434,10 @@
 
 </main>
 
+<a id="wa-float" class="wa-float" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2zm0 18.11h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.25 8.24z"/></svg>
+</a>
+
 <footer>
   <div class="wrap">AM Mentoria Empresarial · Adriana Moreira · © <span id="year"></span></div>
 </footer>
@@ -857,6 +445,130 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  // ---------- WhatsApp config ----------
+  const WA_NUMBER = '5522992751411'; // +55 (22) 99275-1411
+  function waLink(message){
+    return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
+  }
+  const defaultMsg = 'Olá, Adriana! Vim pelo site e gostaria de saber mais sobre a mentoria empresarial.';
+  document.querySelectorAll('#nav-wa, #hero-wa, #contato-wa, #contato-wa-row, #wa-float').forEach(el => {
+    el.href = waLink(defaultMsg);
+  });
+
+  // ---------- Áreas de atuação + cursos ----------
+  const areas = [
+    {
+      tag: '01 · Gestão',
+      title: 'Mentoria Empresarial',
+      pain: 'Apaga incêndio todo dia e não sobra tempo para pensar estratégia?',
+      courses: [
+        'Diagnóstico de Gestão Express',
+        'Plano de Ação em 90 Dias',
+        'Mentoria Individual Contínua',
+        'Reestruturação de Processos'
+      ]
+    },
+    {
+      tag: '02 · Pessoas',
+      title: 'Treinamento de RH',
+      pain: 'Equipe sem clareza de papel, meta e desenvolvimento?',
+      courses: [
+        'Rotinas de Departamento Pessoal',
+        'Programa de Capacitação de Equipes',
+        'Onboarding e Retenção de Talentos',
+        'Liderança para Gestores de Time'
+      ]
+    },
+    {
+      tag: '03 · Jurídico',
+      title: 'Gestão de Contratos',
+      pain: 'Fornecedores e prestadores acompanhados "no olho"?',
+      courses: [
+        'Elaboração de Contratos de Serviço',
+        'Negociação com Fornecedores',
+        'Acompanhamento de Licitações',
+        'Auditoria de Contratos Vigentes'
+      ]
+    },
+    {
+      tag: '04 · Financeiro',
+      title: 'Controle de Custos',
+      pain: 'Custos sobem e ninguém explica exatamente onde?',
+      courses: [
+        'Diagnóstico de Custos e Desperdício',
+        'Indicadores de Desempenho (BI)',
+        'Auditoria Documental',
+        'Plano de Redução de Custos'
+      ]
+    },
+    {
+      tag: '05 · Operações',
+      title: 'Logística & Operações',
+      pain: 'Estoque, compras e ERP funcionando fora de controle?',
+      courses: [
+        'Organização de Estoque e Compras',
+        'Implantação de Rotinas ERP/SAP',
+        'Cadeia de Suprimentos',
+        'Mapeamento de Fluxo Operacional'
+      ]
+    },
+    {
+      tag: '06 · Comercial',
+      title: 'Negociação & Vendas',
+      pain: 'Time comercial sem processo nem proposta de valor clara?',
+      courses: [
+        'Estratégia Comercial e Metas',
+        'Técnicas de Negociação',
+        'Relacionamento com Clientes',
+        'Construção de Propostas de Valor'
+      ]
+    }
+  ];
+
+  const grid = document.getElementById('expertise-grid');
+  areas.forEach((area, i) => {
+    const card = document.createElement('div');
+    card.className = 'expertise-card';
+
+    const head = document.createElement('button');
+    head.className = 'card-head';
+    head.innerHTML = `
+      <span class="tag">${area.tag}</span>
+      <h3>${area.title}</h3>
+      <span class="pain-line">${area.pain}</span>
+      <span class="toggle-row">
+        <span class="cta-hint">Ver opções</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+      </span>
+    `;
+
+    const body = document.createElement('div');
+    body.className = 'card-body';
+    const list = document.createElement('div');
+    list.className = 'course-list';
+    area.courses.forEach(course => {
+      const link = document.createElement('a');
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.href = waLink(`Olá, Adriana! Vim pelo site e tenho interesse em "${course}" (${area.title}). Pode me passar mais detalhes?`);
+      link.innerHTML = `<span>${course}</span>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2zm0 18.11h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.25 8.24z"/></svg>`;
+      list.appendChild(link);
+    });
+    body.appendChild(list);
+
+    head.addEventListener('click', () => {
+      const wasOpen = card.classList.contains('open');
+      grid.querySelectorAll('.expertise-card.open').forEach(c => c.classList.remove('open'));
+      if (!wasOpen) card.classList.add('open');
+    });
+
+    card.appendChild(head);
+    card.appendChild(body);
+    grid.appendChild(card);
+  });
+
+  // ---------- Scroll reveal ----------
   const revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
